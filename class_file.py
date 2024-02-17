@@ -94,13 +94,13 @@ class Birthday(Field):
 class Record:
     """Class representing a Record"""
 
-    def __init__(self, name, address=None, email=None, birthday=None):
+    def __init__(self, name):#, address=None, email=None, birthday=None):
 
         self.name = Name(name)
         self.phones = []
-        self.address = Address(address) if address else None
-        self.email = Email(email) if email else None
-        self.birthday = Birthday(birthday) if birthday else None
+        self.address = []#Address(address) if address else None
+        self.email = []#Email(email) if email else None
+        self.birthday = []#Birthday(birthday) if birthday else None
 
     def add_phone(self,value):
         """function for adding phones"""
@@ -108,15 +108,15 @@ class Record:
 
     def add_address(self, value):
         """function for adding phones"""
-        self.phones.append(Address(value))
+        self.address.append(Address(value))
 
     def add_email(self, value):
         """function for adding phones"""
-        self.phones.append(Email(value))
+        self.email.append(Email(value))
 
     def add_birthday(self, value):
         """function for adding phones"""
-        self.phones.append(Birthday(value))
+        self.birthday.append(Birthday(value))
 
     def remove_phone(self,value):
         """function for remove phones"""
@@ -140,7 +140,11 @@ class Record:
                 return phone
 
     def __str__(self):
-        return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}"
+        return (f"Contact Name: {self.name.value}, "
+                f"Phones: {'; '.join(p.value for p in self.phones)}, "
+                f"Address: {'; '.join(p.value for p in self.address)}, "
+                f"Email: {'; '.join(p.value for p in self.email)}, "
+                f"Birthday: {'; '.join(p.value for p in self.birthday)}")
 
     def days_to_birthday(self):
         """Function to find birthday"""
