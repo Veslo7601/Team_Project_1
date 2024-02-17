@@ -125,7 +125,7 @@ def command_add_birthday(name, birthday):
     if book.find(name):
         new_birthday = book.find(name)
         new_birthday.add_birthday(birthday)
-        return "Address added successfully"
+        return "Birthday added successfully"
 
 command_list = {
         "hello": command_hello,
@@ -161,9 +161,9 @@ def command_parser(user_input):
         user_input = user_input.split()
         if user_input[0] in ["phone", "delete", "find"]:
             return get_command(user_input[0])(user_input[1])
-        elif user_input[0] in ["remove", "update", "add", "add_address", "add_email", "add_birthday"]:
+        elif user_input[0] in ["remove", "update", "add", "add_email", "add_birthday"]:
             return get_command(user_input[0])(user_input[1],(user_input[2]))
-        elif user_input[0] in ["write"]:
+        elif user_input[0] in ["write","add_address"]:
             return get_command(user_input[0])(user_input[1],(user_input[2:]))
         elif user_input[0] in ["edit"]:
             return get_command(user_input[0])(user_input[1],(user_input[2]),(user_input[3]))
