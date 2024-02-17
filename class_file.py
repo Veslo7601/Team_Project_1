@@ -30,6 +30,12 @@ class Phone(Field):
     @value.setter
     def value(self, value):
         """Setter"""
+        value = (value.strip()
+                .removeprefix("+38")
+                .replace("(", "")
+                .replace(")", "")
+                .replace("-", "")
+        )
         if len(str(value)) != 10:
             raise Exception ("The number does not have 10 digits")
         elif not value.isdigit():
