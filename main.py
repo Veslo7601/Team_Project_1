@@ -94,7 +94,19 @@ def command_add_note(name,note):
     if book.find(name):
         record = book.find(name)
         record.add_note(note)
-        return record
+        return "Note added successfully"
+
+def command_delete_note(name):
+    record = book.find(name)
+    if record:
+        record.delete_note()
+        return "Note delete"
+    
+def command_edit_note(name,note):
+    record = book.find(name)
+    if record:
+        record.edit_note(note)
+        return "Note edit"
 
 def command_good_bye():
     """Function close bot"""
@@ -147,6 +159,8 @@ command_list = {
         "add_birthday": command_add_birthday,
 
         "write": command_add_note,
+        "delete_note": command_delete_note,
+        "edit_note": command_edit_note,
     }
 
 ACTIVE_BOT = False
@@ -159,11 +173,11 @@ def command_parser(user_input):
         return get_command(user_input)()
     else:
         user_input = user_input.split()
-        if user_input[0] in ["phone", "delete", "find"]:
+        if user_input[0] in ["phone", "delete", "find", "delete_note"]:
             return get_command(user_input[0])(user_input[1])
         elif user_input[0] in ["remove", "update", "add", "add_email", "add_birthday"]:
             return get_command(user_input[0])(user_input[1],(user_input[2]))
-        elif user_input[0] in ["write","add_address"]:
+        elif user_input[0] in ["write","add_address", "edit_note"]:
             return get_command(user_input[0])(user_input[1],(user_input[2:]))
         elif user_input[0] in ["edit"]:
             return get_command(user_input[0])(user_input[1],(user_input[2]),(user_input[3]))

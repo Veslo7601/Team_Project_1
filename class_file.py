@@ -111,6 +111,13 @@ class Record:
 
     def add_note(self,value):
         self.note = " ".join(value)
+    
+    def delete_note(self):
+        self.note = " "
+    
+    def edit_note(self, value):
+        self.delete_note()
+        self.add_note(value)
 
     def add_phone(self,value):
         """function for adding phones"""
