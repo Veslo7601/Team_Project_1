@@ -99,9 +99,30 @@ def get_command(command):
     """Function command bot"""
     return command_list[command]
 
+def command_add_address(name, address):
+    """Adding a address to the Address Book"""
+    new_record = Record(name, address=address)
+    new_record.add_address(address)
+    book.add_record(new_record)
+    return "Address added successfully"
+
+def command_add_email(name, email):
+    """Adding a email to the Address Book"""
+    new_record = Record(name, email=email)
+    new_record.add_email(email)
+    book.add_record(new_record)
+    return "Email added successfully"
+
+def command_add_birthday(name, birthday):
+    """Adding a birthday to the Address Book"""
+    new_record = Record(name, birthday=birthday)
+    new_record.add_birthday(birthday)
+    book.add_record(new_record)
+    return "Birthday added successfully"
+
 command_list = {
         "hello": command_hello,
-        "add" : command_add_record,
+        "add": command_add_record,
         "find": command_find_record,
         "delete": command_delete_record,
 
@@ -113,6 +134,10 @@ command_list = {
         "good bye": command_good_bye,
         "close": command_good_bye,
         "exit": command_good_bye,
+
+        "add_address": command_add_address,
+        "add_email": command_add_email,
+        "add_birthday": command_add_birthday,
     }
 
 ACTIVE_BOT = False
@@ -127,7 +152,7 @@ def command_parser(user_input):
         user_input = user_input.split()
         if user_input[0] in ["phone", "delete", "find"]:
             return get_command(user_input[0])(user_input[1])
-        elif user_input[0] in ["remove", "update", "add"]:
+        elif user_input[0] in ["remove", "update", "add", "add_address", "add_email", "add_birthday"]:
             return get_command(user_input[0])(user_input[1],(user_input[2]))
         elif user_input[0] in ["edit"]:
             return get_command(user_input[0])(user_input[1],(user_input[2]),(user_input[3]))

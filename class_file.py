@@ -1,4 +1,5 @@
 """Module providing a function """
+import re
 from collections import UserDict
 from datetime import datetime
 
@@ -13,8 +14,10 @@ class Field:
     def __str__(self):
         return str(self.value)
 
+
 class Name(Field):
     """Class representing a Name"""
+
 
 class Phone(Field):
     """Class representing a Phone"""
@@ -34,6 +37,42 @@ class Phone(Field):
         else:
             self.__value = value
 
+
+class Address(Field):
+    """Class representing a Address """
+
+    @property
+    def value(self):
+        """Getter"""
+        return self.__value
+
+    @value.setter
+    def value(self, value):
+        """Setter"""
+        print('Class Address')
+        self.__value = value
+
+
+class Email(Field):
+    """Class representing a Email """
+
+    @property
+    def value(self):
+        """Getter"""
+        return self.__value
+
+    @value.setter
+    def value(self, value):
+        """Setter"""
+        regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
+
+        if (re.fullmatch(regex, value)):
+            self.__value = value
+        else:
+            raise Exception("Invalid Email")
+
+
+
 class Birthday(Field):
     """Class representing a Birthday """
 
@@ -51,18 +90,33 @@ class Birthday(Field):
         else:
             raise ValueError ("The date is incorrect")
 
+
 class Record:
     """Class representing a Record"""
 
-    def __init__(self, name, birthday=None):
+    def __init__(self, name, address=None, email=None, birthday=None):
 
         self.name = Name(name)
         self.phones = []
+        self.address = Address(address) if address else None
+        self.email = Email(email) if email else None
         self.birthday = Birthday(birthday) if birthday else None
 
     def add_phone(self,value):
         """function for adding phones"""
         self.phones.append(Phone(value))
+
+    def add_address(self, value):
+        """function for adding phones"""
+        self.phones.append(Address(value))
+
+    def add_email(self, value):
+        """function for adding phones"""
+        self.phones.append(Email(value))
+
+    def add_birthday(self, value):
+        """function for adding phones"""
+        self.phones.append(Birthday(value))
 
     def remove_phone(self,value):
         """function for remove phones"""
