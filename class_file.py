@@ -104,9 +104,15 @@ class Record:
 
         self.name = Name(name)
         self.phones = []
+        #self.birthday = Birthday(birthday) if birthday else None
         self.address = []#Address(address) if address else None
         self.email = []#Email(email) if email else None
         self.birthday = []#Birthday(birthday) if birthday else None
+        self.note = " "
+
+    def add_note(self,value):
+      
+        self.note = " ".join(value)
 
     def add_phone(self,value):
         """function for adding phones"""
@@ -151,6 +157,8 @@ class Record:
                 f"Address: {'; '.join(p.value for p in self.address)}, "
                 f"Email: {'; '.join(p.value for p in self.email)}, "
                 f"Birthday: {'; '.join(p.value for p in self.birthday)}")
+
+        #return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}, has a note: {self.note}"
 
     def days_to_birthday(self):
         """Function to find birthday"""

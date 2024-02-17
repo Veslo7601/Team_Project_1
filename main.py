@@ -89,6 +89,13 @@ def command_show_all():
     for contact in book.values():
         return f'{contact}'
 
+def command_add_note(name,note):
+
+    if book.find(name):
+        record = book.find(name)
+        record.add_note(note)
+        return record
+
 def command_good_bye():
     """Function close bot"""
     global ACTIVE_BOT
@@ -134,10 +141,12 @@ command_list = {
         "good bye": command_good_bye,
         "close": command_good_bye,
         "exit": command_good_bye,
-
+  
         "add_address": command_add_address,
         "add_email": command_add_email,
         "add_birthday": command_add_birthday,
+
+        "write": command_add_note,
     }
 
 ACTIVE_BOT = False
@@ -154,6 +163,8 @@ def command_parser(user_input):
             return get_command(user_input[0])(user_input[1])
         elif user_input[0] in ["remove", "update", "add", "add_address", "add_email", "add_birthday"]:
             return get_command(user_input[0])(user_input[1],(user_input[2]))
+        elif user_input[0] in ["write"]:
+            return get_command(user_input[0])(user_input[1],(user_input[2:]))
         elif user_input[0] in ["edit"]:
             return get_command(user_input[0])(user_input[1],(user_input[2]),(user_input[3]))
         else:
