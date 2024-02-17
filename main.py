@@ -87,7 +87,7 @@ def command_edit_phone(name,phone_one,phone_two):
 def command_show_all():
     """Function show all phone number"""
     for contact in book.values():
-        print(contact)
+        return f'{contact}'
 
 def command_add_note(name,note):
 
@@ -106,9 +106,30 @@ def get_command(command):
     """Function command bot"""
     return command_list[command]
 
+def command_add_address(name, address):
+    """Adding a address"""
+    if book.find(name):
+        new_address = book.find(name)
+        new_address.add_address(address)
+        return "Address added successfully"
+
+def command_add_email(name, email):
+    """Adding a email"""
+    if book.find(name):
+        new_email = book.find(name)
+        new_email.add_email(email)
+        return "Email added successfully"
+
+def command_add_birthday(name, birthday):
+    """Adding a birthday"""
+    if book.find(name):
+        new_birthday = book.find(name)
+        new_birthday.add_birthday(birthday)
+        return "Address added successfully"
+
 command_list = {
         "hello": command_hello,
-        "add" : command_add_record,
+        "add": command_add_record,
         "find": command_find_record,
         "delete": command_delete_record,
 
@@ -120,6 +141,11 @@ command_list = {
         "good bye": command_good_bye,
         "close": command_good_bye,
         "exit": command_good_bye,
+  
+        "add_address": command_add_address,
+        "add_email": command_add_email,
+        "add_birthday": command_add_birthday,
+
         "write": command_add_note,
     }
 
@@ -135,7 +161,7 @@ def command_parser(user_input):
         user_input = user_input.split()
         if user_input[0] in ["phone", "delete", "find"]:
             return get_command(user_input[0])(user_input[1])
-        elif user_input[0] in ["remove", "update", "add"]:
+        elif user_input[0] in ["remove", "update", "add", "add_address", "add_email", "add_birthday"]:
             return get_command(user_input[0])(user_input[1],(user_input[2]))
         elif user_input[0] in ["write"]:
             return get_command(user_input[0])(user_input[1],(user_input[2:]))

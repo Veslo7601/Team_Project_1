@@ -1,4 +1,5 @@
 """Module providing a function """
+import re
 from collections import UserDict
 from datetime import datetime
 
@@ -13,8 +14,10 @@ class Field:
     def __str__(self):
         return str(self.value)
 
+
 class Name(Field):
     """Class representing a Name"""
+
 
 class Phone(Field):
     """Class representing a Phone"""
@@ -27,12 +30,54 @@ class Phone(Field):
     @value.setter
     def value(self, value):
         """Setter"""
+        value = (value.strip()
+                .removeprefix("+38")
+                .replace("(", "")
+                .replace(")", "")
+                .replace("-", "")
+        )
         if len(str(value)) != 10:
             raise Exception ("The number does not have 10 digits")
         elif not value.isdigit():
             raise Exception ("There are extra characters in the number")
         else:
             self.__value = value
+
+
+class Address(Field):
+    """Class representing a Address """
+
+    @property
+    def value(self):
+        """Getter"""
+        return self.__value
+
+    @value.setter
+    def value(self, value):
+        """Setter"""
+        print('Class Address')
+        self.__value = value
+
+
+class Email(Field):
+    """Class representing a Email """
+
+    @property
+    def value(self):
+        """Getter"""
+        return self.__value
+
+    @value.setter
+    def value(self, value):
+        """Setter"""
+        regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
+
+        if (re.fullmatch(regex, value)):
+            self.__value = value
+        else:
+            raise Exception("Invalid Email")
+
+
 
 class Birthday(Field):
     """Class representing a Birthday """
@@ -51,23 +96,39 @@ class Birthday(Field):
         else:
             raise ValueError ("The date is incorrect")
 
+
 class Record:
     """Class representing a Record"""
 
-    def __init__(self, name, birthday=None):
+    def __init__(self, name):#, address=None, email=None, birthday=None):
 
         self.name = Name(name)
         self.phones = []
-        self.birthday = Birthday(birthday) if birthday else None
+        #self.birthday = Birthday(birthday) if birthday else None
+        self.address = []#Address(address) if address else None
+        self.email = []#Email(email) if email else None
+        self.birthday = []#Birthday(birthday) if birthday else None
         self.note = " "
 
     def add_note(self,value):
-        
+      
         self.note = " ".join(value)
 
     def add_phone(self,value):
         """function for adding phones"""
         self.phones.append(Phone(value))
+
+    def add_address(self, value):
+        """function for adding phones"""
+        self.address.append(Address(value))
+
+    def add_email(self, value):
+        """function for adding phones"""
+        self.email.append(Email(value))
+
+    def add_birthday(self, value):
+        """function for adding phones"""
+        self.birthday.append(Birthday(value))
 
     def remove_phone(self,value):
         """function for remove phones"""
@@ -91,7 +152,13 @@ class Record:
                 return phone
 
     def __str__(self):
-        return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}, has a note: {self.note}"
+        return (f"Contact Name: {self.name.value}, "
+                f"Phones: {'; '.join(p.value for p in self.phones)}, "
+                f"Address: {'; '.join(p.value for p in self.address)}, "
+                f"Email: {'; '.join(p.value for p in self.email)}, "
+                f"Birthday: {'; '.join(p.value for p in self.birthday)}")
+
+        #return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}, has a note: {self.note}"
 
     def days_to_birthday(self):
         """Function to find birthday"""
