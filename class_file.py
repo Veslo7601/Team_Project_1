@@ -59,6 +59,11 @@ class Record:
         self.name = Name(name)
         self.phones = []
         self.birthday = Birthday(birthday) if birthday else None
+        self.note = " "
+
+    def add_note(self,value):
+        
+        self.note = " ".join(value)
 
     def add_phone(self,value):
         """function for adding phones"""
@@ -86,7 +91,7 @@ class Record:
                 return phone
 
     def __str__(self):
-        return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}"
+        return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}, has a note: {self.note}"
 
     def days_to_birthday(self):
         """Function to find birthday"""
