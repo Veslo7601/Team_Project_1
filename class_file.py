@@ -30,12 +30,12 @@ class Phone(Field):
     @value.setter
     def value(self, value):
         """Setter"""
-        value = (value.strip()
-                .removeprefix("+38")
-                .replace("(", "")
-                .replace(")", "")
-                .replace("-", "")
-        )
+        # value = (value.strip()
+        #         .removeprefix("+38")
+        #         .replace("(", "")
+        #         .replace(")", "")
+        #         .replace("-", "")
+        # )
         if len(str(value)) != 10:
             raise Exception ("The number does not have 10 digits")
         elif not value.isdigit():
@@ -55,7 +55,6 @@ class Address(Field):
     @value.setter
     def value(self, value):
         """Setter"""
-        print('Class Address')
         self.__value = value
 
 
@@ -76,8 +75,6 @@ class Email(Field):
             self.__value = value
         else:
             raise Exception("Invalid Email")
-
-
 
 class Birthday(Field):
     """Class representing a Birthday """
@@ -104,15 +101,21 @@ class Record:
 
         self.name = Name(name)
         self.phones = []
-        #self.birthday = Birthday(birthday) if birthday else None
+        self.birthday = " "
         self.address = []#Address(address) if address else None
         self.email = []#Email(email) if email else None
-        self.birthday = []#Birthday(birthday) if birthday else None
+        #self.birthday = []#Birthday(birthday) if birthday else None
         self.note = " "
 
     def add_note(self,value):
-      
         self.note = " ".join(value)
+    
+    def delete_note(self):
+        self.note = " "
+    
+    def edit_note(self, value):
+        self.delete_note()
+        self.add_note(value)
 
     def add_phone(self,value):
         """function for adding phones"""
@@ -120,7 +123,7 @@ class Record:
 
     def add_address(self, value):
         """function for adding phones"""
-        self.address.append(Address(value))
+        self.address.append(Address(" ".join(value)))
 
     def add_email(self, value):
         """function for adding phones"""
@@ -128,7 +131,7 @@ class Record:
 
     def add_birthday(self, value):
         """function for adding phones"""
-        self.birthday.append(Birthday(value))
+        self.birthday = Birthday(value)
 
     def remove_phone(self,value):
         """function for remove phones"""
@@ -152,13 +155,7 @@ class Record:
                 return phone
 
     def __str__(self):
-        return (f"Contact Name: {self.name.value}, "
-                f"Phones: {'; '.join(p.value for p in self.phones)}, "
-                f"Address: {'; '.join(p.value for p in self.address)}, "
-                f"Email: {'; '.join(p.value for p in self.email)}, "
-                f"Birthday: {'; '.join(p.value for p in self.birthday)}")
-
-        #return f"Contact name: {self.name.value}, phones: {'; '.join(p.value for p in self.phones)}, has a note: {self.note}"
+        return f"Contact name: {self.name.value}\n-phones: {'; '.join(p.value for p in self.phones)}\n-email: {'; '.join(p.value for p in self.email)}\n-address: {'; '.join(p.value for p in self.address)} \n-birthday: {self.birthday}\n-note: {self.note}"
 
     def days_to_birthday(self):
         """Function to find birthday"""
