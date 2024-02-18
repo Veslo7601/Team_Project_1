@@ -55,7 +55,9 @@ def command_add_record(name,phone):
 
 def command_find_record(value):
     """Find a contact in the Address Book"""
-    return book.iterator(value)
+    for i in book.iterator(value):
+        print(i)
+    #return book.iterator(value)
 
 def command_delete_record(name):
     """Deleting a contact in the Address Book"""
@@ -87,26 +89,33 @@ def command_edit_phone(name,phone_one,phone_two):
 def command_show_all():
     """Function show all phone number"""
     for contact in book.values():
-        return f'{contact}'
+        print(f'{contact}')
 
 def command_add_note(name,note):
-
+    """Function add note"""
     if book.find(name):
         record = book.find(name)
         record.add_note(note)
         return "Note added successfully"
 
 def command_delete_note(name):
+    """Function delete note"""
     record = book.find(name)
     if record:
         record.delete_note()
         return "Note delete"
-    
+
 def command_edit_note(name,note):
+    """Function edit note"""
     record = book.find(name)
     if record:
         record.edit_note(note)
         return "Note edit"
+
+def command_find_note(value):
+    """Function find note"""
+    for i in book.find_note(value):
+        print(i)
 
 def command_good_bye():
     """Function close bot"""
@@ -154,13 +163,14 @@ command_list = {
         "close": command_good_bye,
         "exit": command_good_bye,
 
-        "add_address": command_add_address,
-        "add_email": command_add_email,
-        "add_birthday": command_add_birthday,
+        "add-address": command_add_address,
+        "add-email": command_add_email,
+        "add-birthday": command_add_birthday,
 
         "write": command_add_note,
         "delete-note": command_delete_note,
         "edit-note": command_edit_note,
+        "find-note": command_find_note,
     }
 
 ACTIVE_BOT = False
@@ -173,7 +183,7 @@ def command_parser(user_input):
         return get_command(user_input)()
     else:
         user_input = user_input.split()
-        if user_input[0] in ["phone", "delete", "find", "delete-note"]:
+        if user_input[0] in ["phone", "delete", "find", "delete-note", "find-note",]:
             return get_command(user_input[0])(user_input[1])
         elif user_input[0] in ["remove", "update", "add", "add-email", "add-birthday"]:
             return get_command(user_input[0])(user_input[1],(user_input[2]))

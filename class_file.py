@@ -104,16 +104,18 @@ class Record:
         self.birthday = " "
         self.address = []#Address(address) if address else None
         self.email = []#Email(email) if email else None
-        #self.birthday = []#Birthday(birthday) if birthday else None
         self.note = " "
 
     def add_note(self,value):
+        """Function add note"""
         self.note = " ".join(value)
-    
+
     def delete_note(self):
+        """Function delete note"""
         self.note = " "
-    
+
     def edit_note(self, value):
+        """Function edit note"""
         self.delete_note()
         self.add_note(value)
 
@@ -155,7 +157,7 @@ class Record:
                 return phone
 
     def __str__(self):
-        return f"Contact name: {self.name.value}\n-phones: {'; '.join(p.value for p in self.phones)}\n-email: {'; '.join(p.value for p in self.email)}\n-address: {'; '.join(p.value for p in self.address)} \n-birthday: {self.birthday}\n-note: {self.note}"
+        return f"Contact name: {self.name.value}\n-phones: {'; '.join(p.value for p in self.phones)}\n-email: {'; '.join(p.value for p in self.email)}\n-address: {'; '.join(p.value for p in self.address)} \n-birthday: {self.birthday}\n-note: {self.note}\n"
 
     def days_to_birthday(self):
         """Function to find birthday"""
@@ -195,20 +197,25 @@ class AddressBook(UserDict):
 
     def iterator(self, value):
         """Iterator"""
-        contact_list = []
+        #contact_list = []
         for contact in self.data.values():
             names = str(contact.name)
             if names.find(value) != -1:
-                contact_list.append(f"{contact} have word {value}")
+                #contact_list.append(f"{contact} have word {value}")
+                 yield f"{contact} have word <{value}>"
 
             for phone in contact.phones:
                 contact_phone = str(phone)
                 if contact_phone.find(value) != -1:
-                    contact_list.append(f"{contact} have word {value}")
+                    #contact_list.append(f"{contact} have word {value}")
+                    yield f"{contact} have word <{value}>"
 
-        if len(contact_list) == 0:
-            return "No matches found"
-        else:
-            return contact_list
+    def find_note(self, value):
+        """Function find note"""
+        for contact in self.data.values():
+            note = str(contact.note)
+            if note.find(value) != -1:
+                yield f"{contact} have note <{note}>"
+
 
 #The file ends
