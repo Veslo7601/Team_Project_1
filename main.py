@@ -163,9 +163,9 @@ command_list = {
         "close": command_good_bye,
         "exit": command_good_bye,
 
-        "add_address": command_add_address,
-        "add_email": command_add_email,
-        "add_birthday": command_add_birthday,
+        "add-address": command_add_address,
+        "add-email": command_add_email,
+        "add-birthday": command_add_birthday,
 
         "write": command_add_note,
         "delete-note": command_delete_note,
