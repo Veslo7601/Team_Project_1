@@ -76,8 +76,6 @@ class Email(Field):
         else:
             raise Exception("Invalid Email")
 
-
-
 class Birthday(Field):
     """Class representing a Birthday """
 
