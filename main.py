@@ -153,14 +153,14 @@ command_list = {
         "good bye": command_good_bye,
         "close": command_good_bye,
         "exit": command_good_bye,
-  
+
         "add_address": command_add_address,
         "add_email": command_add_email,
         "add_birthday": command_add_birthday,
 
         "write": command_add_note,
-        "delete_note": command_delete_note,
-        "edit_note": command_edit_note,
+        "delete-note": command_delete_note,
+        "edit-note": command_edit_note,
     }
 
 ACTIVE_BOT = False
@@ -173,11 +173,11 @@ def command_parser(user_input):
         return get_command(user_input)()
     else:
         user_input = user_input.split()
-        if user_input[0] in ["phone", "delete", "find", "delete_note"]:
+        if user_input[0] in ["phone", "delete", "find", "delete-note"]:
             return get_command(user_input[0])(user_input[1])
-        elif user_input[0] in ["remove", "update", "add", "add_email", "add_birthday"]:
+        elif user_input[0] in ["remove", "update", "add", "add-email", "add-birthday"]:
             return get_command(user_input[0])(user_input[1],(user_input[2]))
-        elif user_input[0] in ["write","add_address", "edit_note"]:
+        elif user_input[0] in ["write","add-address", "edit-note"]:
             return get_command(user_input[0])(user_input[1],(user_input[2:]))
         elif user_input[0] in ["edit"]:
             return get_command(user_input[0])(user_input[1],(user_input[2]),(user_input[3]))
