@@ -127,6 +127,29 @@ def command_add_birthday(name, birthday):
         new_birthday.add_birthday(birthday)
         return "Birthday added successfully"
 
+
+def command_remove_address(name, address):
+    """Deleting a address"""
+    if book.find(name):
+        record = book.find(name)
+        record.remove_address(address)
+        return 'Address deleting'
+
+def command_remove_email(name, email):
+    """Deleting a email"""
+    if book.find(name):
+        record = book.find(name)
+        record.remove_email(email)
+        return 'Email deleting'
+
+def command_remove_birthday(name, birthday):
+    """Deleting a birthday"""
+    if book.find(name):
+        record = book.find(name)
+        record.remove_birthday(birthday)
+        return 'Birthda deleting'
+
+
 command_list = {
         "hello": command_hello,
         "add": command_add_record,
@@ -141,10 +164,13 @@ command_list = {
         "good bye": command_good_bye,
         "close": command_good_bye,
         "exit": command_good_bye,
-  
-        "add_address": command_add_address,
-        "add_email": command_add_email,
-        "add_birthday": command_add_birthday,
+
+        "add-address": command_add_address,
+        "add-email": command_add_email,
+        "add-birthday": command_add_birthday,
+        "remove-address": command_remove_address,
+        "remove-email": command_remove_email,
+        "remove-birthday": command_remove_birthday,
 
         "write": command_add_note,
     }
@@ -161,9 +187,9 @@ def command_parser(user_input):
         user_input = user_input.split()
         if user_input[0] in ["phone", "delete", "find"]:
             return get_command(user_input[0])(user_input[1])
-        elif user_input[0] in ["remove", "update", "add", "add_email", "add_birthday"]:
+        elif user_input[0] in ["remove", "update", "add", "add-email", "add-birthday", "remove-address", "remove-email", "remove-birthday"]:
             return get_command(user_input[0])(user_input[1],(user_input[2]))
-        elif user_input[0] in ["write","add_address"]:
+        elif user_input[0] in ["write","add-address"]:
             return get_command(user_input[0])(user_input[1],(user_input[2:]))
         elif user_input[0] in ["edit"]:
             return get_command(user_input[0])(user_input[1],(user_input[2]),(user_input[3]))

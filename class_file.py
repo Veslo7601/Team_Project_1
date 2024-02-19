@@ -135,6 +135,36 @@ class Record:
         else:
             raise ValueError()
 
+    def remove_address(self, value):
+        """function for remove address"""
+        if self.find_address(value):
+            self.address.remove(self.find_address(value))
+        else:
+            raise ValueError()
+
+    def find_address(self, value):
+        """function for find address"""
+        for phone in self.address:
+            if str(phone) == str(value):
+                return phone
+
+    def remove_email(self, value):
+        """function for remove email"""
+        if self.find_email(value):
+            self.email.remove(self.find_email(value))
+        else:
+            raise ValueError()
+
+    def find_email(self, value):
+        """function for find email"""
+        for phone in self.email:
+            if str(phone) == str(value):
+                return phone
+
+    def remove_birthday(self, value):
+        """function for remove birthday"""
+        self.birthday = str(self.birthday).replace(value,'')
+
     def edit_phone(self,value,value_two):
         """function for edit phones"""
         if self.find_phone(value):
