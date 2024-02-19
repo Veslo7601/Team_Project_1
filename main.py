@@ -127,7 +127,6 @@ def command_add_birthday(name, birthday):
         new_birthday.add_birthday(birthday)
         return "Birthday added successfully"
 
-
 def command_remove_address(name, address):
     """Deleting a address"""
     if book.find(name):
@@ -142,11 +141,11 @@ def command_remove_email(name, email):
         record.remove_email(email)
         return 'Email deleting'
 
-def command_remove_birthday(name, birthday):
+def command_remove_birthday(name):
     """Deleting a birthday"""
     if book.find(name):
         record = book.find(name)
-        record.remove_birthday(birthday)
+        record.remove_birthday()
         return 'Birthda deleting'
 
 
@@ -185,9 +184,9 @@ def command_parser(user_input):
         return get_command(user_input)()
     else:
         user_input = user_input.split()
-        if user_input[0] in ["phone", "delete", "find"]:
+        if user_input[0] in ["phone", "delete", "find", "remove-birthday"]:
             return get_command(user_input[0])(user_input[1])
-        elif user_input[0] in ["remove", "update", "add", "add-email", "add-birthday", "remove-address", "remove-email", "remove-birthday"]:
+        elif user_input[0] in ["remove", "update", "add", "add-email", "add-birthday", "remove-address", "remove-email"]:
             return get_command(user_input[0])(user_input[1],(user_input[2]))
         elif user_input[0] in ["write","add-address"]:
             return get_command(user_input[0])(user_input[1],(user_input[2:]))
