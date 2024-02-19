@@ -148,8 +148,30 @@ def command_add_birthday(name, birthday):
         new_birthday.add_birthday(birthday)
         return "Birthday added successfully"
 
+def command_help_info():
+    return """Commands list:\n
+        *hello - prints greeting \n
+        *add <contact name> <phone number>- adds record if contact name is not present, adds phone if contact name is present and phone number differs from other \n
+        *update <contact name> <old phone> <new phone>- changes contact phone by name \n
+        *delete <contact name>- delete contact or delete \n
+        *remove <contact name> <phone> - delete specified phone for the contact \n        
+        *show all - prints entire Address Book \n
+        *find <name or phone> - filter by name letters or phone number \n
+        *exit, good bye, close - saves changes to database and exit \n
+        *add-address <name, address> - adds address for the contact with specified name \n
+        *add-email <name, email> - adds email for the specified contact \n
+        *add-birthday <name, borthday> - adds birthday for the specified contact \n
+        *write <name, note> - adds note for the contact with specified name \n
+        *delete-note <name, note> - removes note for the contact with specified name \n
+        *edit-note <name, note> - edit note \n
+        *find-note <note> - find contact with specified note \n
+        *show-birthdate <number of days> - shows all contacts wich have birthday on a date that will occure in specified number of days \n
+        """
+
+
 command_list = {
         "hello": command_hello,
+        "help": command_help_info,
         "add": command_add_record,
         "find": command_find_record,
         "delete": command_delete_record,
@@ -179,7 +201,7 @@ book = None
 @decorator
 def command_parser(user_input):
     """Сommand parser"""
-    if user_input in ["show all", "hello", "good bye", "close", "exit"]:
+    if user_input in ["show all", "hello", "good bye", "close", "exit", "help"]:
         return get_command(user_input)()
     else:
         user_input = user_input.split()
