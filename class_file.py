@@ -97,13 +97,13 @@ class Birthday(Field):
 class Record:
     """Class representing a Record"""
 
-    def __init__(self, name):#, address=None, email=None, birthday=None):
+    def __init__(self, name):
 
         self.name = Name(name)
         self.phones = []
         self.birthday = " "
-        self.address = []#Address(address) if address else None
-        self.email = []#Email(email) if email else None
+        self.address = []
+        self.email = []
         self.note = " "
 
     def add_note(self,value):
@@ -142,7 +142,7 @@ class Record:
         else:
             raise ValueError()
 
-    def edit_phone(self,value,value_two):
+    def edit_phone(self, value, value_two):
         """function for edit phones"""
         if self.find_phone(value):
             self.remove_phone(value)
@@ -150,11 +150,41 @@ class Record:
         else:
             raise ValueError()
 
-    def find_phone(self,value):
+    def find_phone(self, value):
         """function for find phones"""
         for phone in self.phones:
             if str(phone) == str(value):
                 return phone
+
+    def remove_address(self, value):
+        """function for remove address"""
+        if self.find_address(value):
+            self.address.remove(self.find_address(value))
+        else:
+            raise ValueError()
+
+    def find_address(self, value):
+        """function for find address"""
+        for phone in self.address:
+            if str(phone) == str(value):
+                return phone
+
+    def remove_email(self, value):
+        """function for remove email"""
+        if self.find_email(value):
+            self.email.remove(self.find_email(value))
+        else:
+            raise ValueError()
+
+    def find_email(self, value):
+        """function for find email"""
+        for phone in self.email:
+            if str(phone) == str(value):
+                return phone
+
+    def remove_birthday(self):
+        """function for remove birthday"""
+        self.birthday = ' '
 
     def __str__(self):
         return f"Contact name: {self.name.value}\n-phones: {'; '.join(p.value for p in self.phones)}\n-email: {'; '.join(p.value for p in self.email)}\n-address: {'; '.join(p.value for p in self.address)} \n-birthday: {self.birthday}\n-note: {self.note}\n"

@@ -148,6 +148,28 @@ def command_add_birthday(name, birthday):
         new_birthday.add_birthday(birthday)
         return "Birthday added successfully"
 
+def command_remove_address(name, address):
+    """Deleting a address"""
+    if book.find(name):
+        record = book.find(name)
+        record.remove_address(address)
+        return 'Address deleting'
+
+def command_remove_email(name, email):
+    """Deleting a email"""
+    if book.find(name):
+        record = book.find(name)
+        record.remove_email(email)
+        return 'Email deleting'
+
+def command_remove_birthday(name):
+    """Deleting a birthday"""
+    if book.find(name):
+        record = book.find(name)
+        record.remove_birthday()
+        return 'Birthda deleting'
+
+
 command_list = {
         "hello": command_hello,
         "add": command_add_record,
@@ -167,6 +189,10 @@ command_list = {
         "add-email": command_add_email,
         "add-birthday": command_add_birthday,
 
+        "remove-address": command_remove_address,
+        "remove-email": command_remove_email,
+        "remove-birthday": command_remove_birthday,
+
         "write": command_add_note,
         "delete-note": command_delete_note,
         "edit-note": command_edit_note,
@@ -183,11 +209,12 @@ def command_parser(user_input):
         return get_command(user_input)()
     else:
         user_input = user_input.split()
-        if user_input[0] in ["phone", "delete", "find", "delete-note", "find-note",]:
+        if user_input[0] in ["phone", "delete", "find", "remove-birthday", "delete-note", "find-note"]:
             return get_command(user_input[0])(user_input[1])
-        elif user_input[0] in ["remove", "update", "add", "add-email", "add-birthday"]:
+        elif user_input[0] in ["remove", "update", "add", "add-email", "add-birthday", "remove-address", "remove-email"]:
             return get_command(user_input[0])(user_input[1],(user_input[2]))
         elif user_input[0] in ["write","add-address", "edit-note"]:
+
             return get_command(user_input[0])(user_input[1],(user_input[2:]))
         elif user_input[0] in ["edit"]:
             return get_command(user_input[0])(user_input[1],(user_input[2]),(user_input[3]))
