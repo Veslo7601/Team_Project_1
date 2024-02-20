@@ -34,7 +34,7 @@ def start():
     with open('Data.bin', 'rb') as file:
         global book
         book = pickle.load(file)
-    return "Bot start"
+    return "Bot started"
 
 def save():
     """Save data"""
@@ -147,6 +147,20 @@ def command_add_birthday(name, birthday):
         new_birthday = book.find(name)
         new_birthday.add_birthday(birthday)
         return "Birthday added successfully"
+    
+def command_show_birthday(days: int):
+    #result = AddressBook()
+    cnt = 0
+    for contact in book.values():
+        if contact.days_to_birthday() - int(days) == 0:
+            #result.update({name : record})
+            print(f'{contact}')
+            cnt += 1
+    if cnt > 0:
+        return f"Contacts that have birthday in {days} days are printed above"
+    else:
+        return f"There are no contacts that have birthdays in {days} days in the AddressBook"
+        
 
 def command_help_info():
     return """Commands list:\n
@@ -202,6 +216,7 @@ command_list = {
 
         "show all": command_show_all,
         "good bye": command_good_bye,
+        "show-birthdate": command_show_birthday,
         "close": command_good_bye,
         "exit": command_good_bye,
 
@@ -229,7 +244,7 @@ def command_parser(user_input):
         return get_command(user_input)()
     else:
         user_input = user_input.split()
-        if user_input[0] in ["phone", "delete", "find", "remove-birthday", "delete-note", "find-note"]:
+        if user_input[0] in ["phone", "delete", "find", "delete-note", "find-note", "show-birthdate", "remove-birthday",]:
             return get_command(user_input[0])(user_input[1])
         elif user_input[0] in ["remove", "update", "add", "add-email", "add-birthday", "remove-address", "remove-email"]:
             return get_command(user_input[0])(user_input[1],(user_input[2]))
