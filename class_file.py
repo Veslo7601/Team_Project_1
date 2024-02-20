@@ -165,9 +165,9 @@ class Record:
 
     def find_address(self, value):
         """function for find address"""
-        for phone in self.address:
-            if str(phone) == str(value):
-                return phone
+        for address in self.address:
+            if str(address) == str(value):
+                return address
 
     def remove_email(self, value):
         """function for remove email"""
@@ -178,9 +178,9 @@ class Record:
 
     def find_email(self, value):
         """function for find email"""
-        for phone in self.email:
-            if str(phone) == str(value):
-                return phone
+        for email in self.email:
+            if str(email) == str(value):
+                return email
 
     def remove_birthday(self):
         """function for remove birthday"""
