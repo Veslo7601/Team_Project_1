@@ -165,8 +165,7 @@ def command_help_info():
         *delete-note <name, note> - removes note for the contact with specified name \n
         *edit-note <name, note> - edit note \n
         *find-note <note> - find contact with specified note \n
-        *show-birthdate <number of days> - shows all contacts wich have birthday on a date that will occure in specified number of days \n
-        """
+        *show-birthdate <number of days> - shows all contacts wich have birthday on a date that will occure in specified number of days \n"""
 
 
 command_list = {
