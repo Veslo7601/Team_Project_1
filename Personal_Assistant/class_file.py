@@ -99,6 +99,11 @@ class Record:
         self.address = []
         self.email = []
         self.note = " "
+        self.tags = []
+
+    def add_teg(self, tags):
+        """Function add teg"""
+        self.tags.append(tags)
 
     def add_note(self,value):
         """Function add note"""
@@ -181,7 +186,7 @@ class Record:
         self.birthday = ' '
 
     def __str__(self):
-        return f"Contact name: {self.name.value}\n-phones: {'; '.join(p.value for p in self.phones)}\n-email: {'; '.join(p.value for p in self.email)}\n-address: {'; '.join(p.value for p in self.address)} \n-birthday: {self.birthday}\n-note: {self.note}\n"
+        return f"Contact name: {self.name.value}\n\t-phones: {'; '.join(p.value for p in self.phones)}\n\t-email: {'; '.join(p.value for p in self.email)}\n\t-address: {'; '.join(p.value for p in self.address)} \n\t-birthday: {self.birthday}\n\t-note: {self.note}\n\t-tags: {self.tags}\n"
 
     # days_to_birthday
     def days_to_birthday(self)->int:
@@ -236,5 +241,11 @@ class AddressBook(UserDict):
             if note.find(value) != -1:
                 yield f"{contact} have note <{note}>"
 
+    def search_notes_by_tag(self, tags):
+        """Function search tags"""
+        for contact in self.data.values():
+            for tag in contact.tags:
+                if tags in tag:
+                    yield f"{contact} have note <{tags}>"
 
 #The file ends
