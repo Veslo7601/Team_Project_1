@@ -249,7 +249,6 @@ def command_parser(user_input):
         elif user_input[0] in ["remove", "update", "add", "add-email", "add-birthday", "remove-address", "remove-email"]:
             return get_command(user_input[0])(user_input[1],(user_input[2]))
         elif user_input[0] in ["write","add-address", "edit-note"]:
-
             return get_command(user_input[0])(user_input[1],(user_input[2:]))
         elif user_input[0] in ["edit"]:
             return get_command(user_input[0])(user_input[1],(user_input[2]),(user_input[3]))
