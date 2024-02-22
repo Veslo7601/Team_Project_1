@@ -28,3 +28,9 @@ Users can operate the "Address Book" application using the following commands:
     • delete-note <name, note>: Removes a note associated with the specified contact. edit-note <name, note>: Edits an existing note. 
     • find-note : Finds contacts with a specific note. 
     • show-birthdate : Displays all contacts with birthdays occurring within the specified number of days.
+
+Installation instruction
+
+Package can be installed using command pip install -e . (or python setup.py install, this approach requires administrator permissions).
+After installation personal_bot_assistant should apear in the system.
+When the package is installed the program can be launched with the command bot-start
